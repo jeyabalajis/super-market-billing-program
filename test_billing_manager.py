@@ -75,6 +75,13 @@ class TestBillingManager(TestCase):
         total_item_amount = 0
         total_billed_amount = 0
         for bill_item in bill_items:
+            name = bill_item.item.store_product.product.name
+            item_amount = bill_item.item_amount.value
+            discount_amt = bill_item.discount_amount.value
+            billed_amt = bill_item.billed_amount.value
+
+            print(f"Item: {name} Amount: {item_amount} Disc: {discount_amt} Billed: {billed_amt}")
+                
             total_item_amount += bill_item.item_amount.value
             total_discount_amount += bill_item.discount_amount.value
             total_billed_amount += bill_item.billed_amount.value
