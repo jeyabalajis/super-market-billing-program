@@ -62,7 +62,11 @@ class TestBillingManager(TestCase):
 
         max_or_free_item_discount_strategy = MaxOrFreeItemDiscountStrategy()
 
+        # For store 1 apple, free item discount is applied, hence it takes precedence. Out of 6 items, 1 item is free (worth Rs. 50)
         assert max_or_free_item_discount_strategy.calculate_discount_amount(order_item_apple).value == 50.0
+        
+        # For store 1 organe, there is no free item discount (only flat percent discount). Hence the max of discount percentage 
+        # across (20%, 18%, 10%) is applied. For 2 kg of orange, total value is 160. 20% discount works out to Rs. 32
         assert max_or_free_item_discount_strategy.calculate_discount_amount(order_item_orange).value == 32.0
 
         max_discount_strategy = MaxDiscountStrategy()
